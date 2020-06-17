@@ -34,5 +34,9 @@ public class EmployeeController {
 	public void deleteEmployee(@PathVariable String id) {
 		employeeService.deleteEmployee(id);
 	}
+	@RequestMapping("/test")
+	public String test(){
+		return "Tested Positive";
+	}
 	
 }
