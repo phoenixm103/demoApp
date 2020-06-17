@@ -33,7 +33,7 @@ public class EmployeeControllerTest {
 	@Test
 	public void getAllEployeeTest() {
 		when(employeeRepository.findAll()).thenReturn(Stream
-				.of(new Employee("0001", "Moin"), new Employee("0002", "Mahmud")).collect(Collectors.toList()));
+				.of(new Employee("0001", "Moinuddin"), new Employee("0002", "Mahmud")).collect(Collectors.toList()));
 		assertEquals(2, employeeService.getAllEmployee().size());
 	}
 
