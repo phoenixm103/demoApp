@@ -50,11 +50,20 @@
   </dependencies>
   <build>
   <plugins>
-  <plugin>
+    <plugin>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-maven-plugin</artifactId>
     </plugin>
-    </plugins>
-    <finalName>demoApp</finalName>
+    <plugin>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.1</version>
+        <configuration>
+           <source>${java.version}</source>
+           <target>${java.version}</target>
+        </configuration>
+    </plugin>
+    
+   </plugins>
+   <finalName>demoApp</finalName>
   </build>
 </project>
