@@ -4,40 +4,33 @@ def DOCKER_HUB_USER="moin103"      // Change with you'r DockerHub username.
 def DOCKER_HUB_PASSWORD="Samiolol0987#"
 def HTTP_PORT="6090"                // This is related to application port
 
-pipeline {
+node{
     agent any
-    stages {
-    	
-    	stage('Checkout') {
-         	checkout scm
-    	}
-    	stage ('Compile Stage') {
-        	steps {
-            	sh 'mvn clean compile'        
-            }
+    stage('Checkout'){
+         checkout scm
+    }
+    stage('Compile Stage'){
+        steps {
+            sh 'mvn clean compile'        
         }
-        stage ('Testing Stage') {
-            steps {
-            	sh 'mvn test'
-            }
+    }
+    stage ('Testing Stage') {
+        steps {
+            sh 'mvn test'
         }
-        stage("Image Prune"){
-        	imagePrune(CONTAINER_NAME)
-    	}
-
-    	stage('Image Build'){
-        	imageBuild(CONTAINER_NAME,CONTAINER_TAG)
-    	}
-        stage('Push to Docker Registry'){
+    }
+    stage("Image Prune"){
+        imagePrune(CONTAINER_NAME)
+    }
+    stage('Image Build'){
+        imageBuild(CONTAINER_NAME,CONTAINER_TAG)
+    }
+    stage('Push to Docker Registry'){
+        pushToImage(CONTAINER_NAME,CONTAINER_TAG,DOCKER_HUB_USER,DOCKER_HUB_PASSWORD )
         
-            pushToImage(CONTAINER_NAME,CONTAINER_TAG,DOCKER_HUB_USER,DOCKER_HUB_PASSWORD )
-        
-    	}
-
- 
-
-	}
+    }
 }
+
 def imagePrune(containerName){
     try {
         sh "docker image prune -f"
@@ -62,6 +55,3 @@ def runApp(containerName, tag, dockerHubUser, httpPort){
     sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $dockerHubUser/$containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
 }
-
-
-
