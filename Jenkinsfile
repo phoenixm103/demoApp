@@ -7,9 +7,9 @@ pipeline {
                 
             }
         }
-        stage ('Unit test') {
-        	steps{
-            	sh "mvn test -Dtest=AllUnitTests"
+        stage ('Testing Stage') {
+            steps {
+            	sh 'mvn test'
             }
         }
 		stage ('Deployment Stage') {
