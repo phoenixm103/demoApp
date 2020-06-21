@@ -5,8 +5,6 @@ def DOCKER_HUB_PASSWORD="moin12345"
 def HTTP_PORT="6090"                // This is related to application port
 
 pipeline {
-
-	
     agent any
     stages {
     	stage('Checkout') {
@@ -24,11 +22,6 @@ pipeline {
             	sh 'mvn test'
             }
         }
-        stage("Image Prune"){
-        	steps {
-        		imagePrune(CONTAINER_NAME)
-    		}
-    	}
     	stage('Image Build'){
         	steps {
         		imageBuild(CONTAINER_NAME, CONTAINER_TAG)
@@ -41,12 +34,7 @@ pipeline {
         }
     }
 }
-def imagePrune(containerName){
-    try {
-        sh "docker image prune -f"
-        sh "docker stop $containerName"
-    } catch(error){}
-}
+
 
 def imageBuild(containerName, tag){
     sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
