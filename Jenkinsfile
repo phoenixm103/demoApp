@@ -43,19 +43,19 @@ pipeline {
 }
 def imagePrune(containerName){
     try {
-        sh "sudo docker image prune -f"
-        sh "sudo docker stop $containerName"
+        sh "docker image prune -f"
+        sh "docker stop $containerName"
     } catch(error){}
 }
 
 def imageBuild(containerName, tag){
-    sh "sudo docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
+    sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
     echo "Image build complete"
 }
 
 def pushToImage(containerName, tag, dockerUser, dockerPassword){
-    sh "sudo docker login -u $dockerUser -p $dockerPassword"
-    sh "sudo docker tag $containerName:$tag $dockerUser/$containerName:$tag"
-    sh "sudo docker push $dockerUser/$containerName:$tag"
+    sh "docker login -u $dockerUser -p $dockerPassword"
+    sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
+    sh "docker push $dockerUser/$containerName:$tag"
     echo "Image push complete"
 }
