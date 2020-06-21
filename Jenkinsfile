@@ -5,6 +5,11 @@ def DOCKER_HUB_PASSWORD="moin12345"
 def HTTP_PORT="6090"                // This is related to application port
 
 pipeline {
+
+	environment {
+    registry = "moin12345/docker-test"
+    registryCredential = ‘dockerhub’
+	}
     agent any
     stages {
     	stage('Checkout') {
@@ -22,6 +27,13 @@ pipeline {
             	sh 'mvn test'
             }
         }
+        stage('Building image') {
+    		steps{
+      			script {
+        			docker.build registry + ":$BUILD_NUMBER"
+      		}
+    }
+  }
         stage("Image Prune"){
         	steps {
         		imagePrune(CONTAINER_NAME)
