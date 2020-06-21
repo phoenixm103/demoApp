@@ -8,7 +8,7 @@ pipeline {
 
 	environment {
     registry = "moin12345/docker-test"
-    registryCredential = ‘dockerhub’
+    registryCredential = "dockerhub"
 	}
     agent any
     stages {
