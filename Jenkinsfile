@@ -8,7 +8,7 @@ pipeline {
 
 	environment {
     registry = "moin12345/docker-test"
-    registryCredential = "dockerhub"
+    registryCredential = "dockerhub"	
 	}
     agent any
     stages {
@@ -27,13 +27,6 @@ pipeline {
             	sh 'mvn test'
             }
         }
-        stage('Building image') {
-    		steps{
-      			script {
-        			docker.build registry + ":$BUILD_NUMBER"
-      		}
-    }
-  }
         stage("Image Prune"){
         	steps {
         		imagePrune(CONTAINER_NAME)
