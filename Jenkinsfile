@@ -1,7 +1,7 @@
 def CONTAINER_NAME="demoapp4"
 def CONTAINER_TAG="latest"
-def DOCKER_HUB_USER="moin12345"      // Change with you'r DockerHub username.
-def DOCKER_HUB_PASSWORD="moin12345"
+def DOCKER_HUB_USER="moin123456"      // Change with you'r DockerHub username.
+def DOCKER_HUB_PASSWORD="moin123456"
 def HTTP_PORT="6090"                // This is related to application port
 
 pipeline {
