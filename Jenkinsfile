@@ -1,4 +1,4 @@
-def CONTAINER_NAME="demoapp3"
+def CONTAINER_NAME="demoapp4"
 def CONTAINER_TAG="latest"
 def DOCKER_HUB_USER="moin12345"      // Change with you'r DockerHub username.
 def DOCKER_HUB_PASSWORD="moin12345"
